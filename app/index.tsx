@@ -9,7 +9,7 @@ export default function IndexRoute() {
   const activeRole = useAuthStore((state) => state.activeRole);
 
   if (!isAuthenticated) {
-    return <Redirect href={routes.authHome} />;
+    return <Redirect href={routes.publicWelcome} />;
   }
 
   return <Redirect href={resolveAuthenticatedRoute(activeRole)} />;

@@ -3,40 +3,16 @@ import { View } from 'react-native';
 
 import { env } from '@/shared/config/env';
 import { routes } from '@/shared/constants/routes';
+import { UserRole } from '@/shared/enums/domain';
 import { AppButton } from '@/shared/ui/primitives/app-button';
 import { AppText } from '@/shared/ui/primitives/app-text';
 import { Screen } from '@/shared/ui/primitives/screen';
 import { SurfaceCard } from '@/shared/ui/primitives/surface-card';
 
-const shellLinks = [
-  {
-    description:
-      'OTP, email verification, and session restore will be built here.',
-    href: routes.authHome,
-    label: 'Auth Shell',
-    tone: 'primary' as const,
-  },
-  {
-    description:
-      'Route group reserved for discovery, reservation, and review screens.',
-    href: routes.customerHome,
-    label: 'Customer Shell',
-    tone: 'secondary' as const,
-  },
-  {
-    description:
-      'Brand, service, and provider operations will be built in this shell.',
-    href: routes.providerHome,
-    label: 'Provider Shell',
-    tone: 'secondary' as const,
-  },
-];
-
-const foundationPillars = [
-  'Expo Router based route groups',
-  'QueryClient, SafeArea, and GestureHandler provider chain',
-  'Zustand powered global toast and modal host store',
-  'NativeWind theme tokens and environment helpers',
+const onboardingPromises = [
+  'Use one account for both customer and service owner roles.',
+  'Sign in with a phone number and keep the session restored across launches.',
+  'Verify email with a magic link without breaking the active session.',
 ];
 
 export function WelcomeScreen() {
@@ -47,28 +23,22 @@ export function WelcomeScreen() {
       <SurfaceCard className="gap-5 bg-accent px-6 py-6">
         <View className="gap-2">
           <AppText className="text-surface/75" variant="eyebrow">
-            Reziphay / Step 1
+            Reziphay
           </AppText>
           <AppText className="text-surface" variant="display">
-            The mobile foundation is now in place.
+            Flexible reservations for customers and service owners.
           </AppText>
           <AppText className="text-surface/80" variant="body">
-            Router structure, provider wiring, and initial design tokens are set
-            up for the dual-role reservation experience.
+            Start with the role you need right now. You can stay inside the same
+            account and switch context later.
           </AppText>
         </View>
-
-        <AppButton
-          label="Open modal preview"
-          onPress={() => router.push(routes.modalPreview)}
-          tone="ghost"
-        />
       </SurfaceCard>
 
       <SurfaceCard className="gap-4">
-        <AppText variant="title">What does this foundation include?</AppText>
+        <AppText variant="title">What is ready in this build?</AppText>
         <View className="gap-3">
-          {foundationPillars.map((pillar) => (
+          {onboardingPromises.map((pillar) => (
             <View
               className="flex-row items-start gap-3 rounded-2xl bg-canvas px-4 py-3"
               key={pillar}
@@ -80,24 +50,40 @@ export function WelcomeScreen() {
         </View>
       </SurfaceCard>
 
-      <View className="gap-3">
-        {shellLinks.map((item) => (
-          <SurfaceCard className="gap-4" key={item.label}>
-            <View className="gap-2">
-              <AppText variant="label">{item.label}</AppText>
-              <AppText className="text-ink-soft">{item.description}</AppText>
-            </View>
-            <AppButton
-              label={`${item.label} preview`}
-              onPress={() => router.push(item.href)}
-              tone={item.tone}
-            />
-          </SurfaceCard>
-        ))}
-      </View>
+      <SurfaceCard className="gap-3">
+        <AppText variant="title">Choose how you want to continue</AppText>
+        <AppButton
+          label="Continue as customer"
+          onPress={() =>
+            router.push({
+              params: {
+                roleHint: UserRole.CUSTOMER,
+              },
+              pathname: routes.authPhone,
+            })
+          }
+        />
+        <AppButton
+          label="Continue as service owner"
+          onPress={() =>
+            router.push({
+              params: {
+                roleHint: UserRole.SERVICE_OWNER,
+              },
+              pathname: routes.authPhone,
+            })
+          }
+          tone="secondary"
+        />
+        <AppButton
+          label="Already have a code?"
+          onPress={() => router.push(routes.authPhone)}
+          tone="secondary"
+        />
+      </SurfaceCard>
 
       <SurfaceCard className="gap-2 bg-surface-muted">
-        <AppText variant="label">Environment</AppText>
+        <AppText variant="label">Environment snapshot</AppText>
         <AppText className="text-ink-soft">API: {env.apiBaseUrl}</AppText>
         <AppText className="text-ink-soft">Profile: {env.appEnv}</AppText>
         <AppText className="text-ink-soft">

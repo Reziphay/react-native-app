@@ -9,6 +9,12 @@ export const apiRoutes = {
     refresh: '/auth/refresh',
     switchRole: '/auth/switch-role',
   },
+  discover: {
+    brands: '/discover/brands',
+    categories: '/discover/categories',
+    providers: '/discover/providers',
+    services: '/discover/services',
+  },
   users: {
     devices: '/users/me/devices',
     me: '/users/me',
