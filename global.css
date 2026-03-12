@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --rz-accent: #c65d1a;
+  --rz-canvas: #f3efe6;
+  --rz-ink: #1f1a17;
+  --rz-surface: #fffdf8;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #f7dcc7 0%, #f3efe6 55%);
+  color: var(--rz-ink);
+  font-family: system-ui, sans-serif;
+}
