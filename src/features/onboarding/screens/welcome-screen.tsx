@@ -10,19 +10,22 @@ import { SurfaceCard } from '@/shared/ui/primitives/surface-card';
 
 const shellLinks = [
   {
-    description: 'OTP, email verification, and session restore will be built here.',
+    description:
+      'OTP, email verification, and session restore will be built here.',
     href: routes.authHome,
     label: 'Auth Shell',
     tone: 'primary' as const,
   },
   {
-    description: 'Route group reserved for discovery, reservation, and review screens.',
+    description:
+      'Route group reserved for discovery, reservation, and review screens.',
     href: routes.customerHome,
     label: 'Customer Shell',
     tone: 'secondary' as const,
   },
   {
-    description: 'Brand, service, and provider operations will be built in this shell.',
+    description:
+      'Brand, service, and provider operations will be built in this shell.',
     href: routes.providerHome,
     label: 'Provider Shell',
     tone: 'secondary' as const,

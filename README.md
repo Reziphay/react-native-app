@@ -51,4 +51,3 @@ src/
 - Zustand based toast and modal host foundation
 - NativeWind theme tokens
 - Environment config helper
-# react-native-app

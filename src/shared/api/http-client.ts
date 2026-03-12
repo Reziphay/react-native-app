@@ -7,6 +7,7 @@ import axios, {
 } from 'axios';
 
 import { authApi } from '@/features/auth/api/auth-api';
+import { resetAuthSession } from '@/features/auth/lib/auth-session-reset';
 import { useAuthStore } from '@/features/auth/store/auth-store';
 import {
   AppApiError,
@@ -158,7 +159,7 @@ httpClient.interceptors.response.use(
 
         return httpClient.request(config);
       } catch (refreshError) {
-        useAuthStore.getState().clearSession();
+        await resetAuthSession();
 
         return Promise.reject(toAppApiError(refreshError));
       }
@@ -167,7 +168,7 @@ httpClient.interceptors.response.use(
     const normalizedError = toAppApiError(error);
 
     if (isUnauthorizedError(normalizedError)) {
-      useAuthStore.getState().clearSession();
+      await resetAuthSession();
     }
 
     return Promise.reject(normalizedError);
