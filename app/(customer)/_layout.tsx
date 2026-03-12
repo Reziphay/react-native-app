@@ -9,7 +9,7 @@ export default function CustomerLayout() {
   const activeRole = useAuthStore((state) => state.activeRole);
 
   if (!isAuthenticated) {
-    return <Redirect href={routes.authHome} />;
+    return <Redirect href={routes.publicWelcome} />;
   }
 
   if (activeRole === UserRole.SERVICE_OWNER) {

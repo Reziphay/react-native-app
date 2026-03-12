@@ -27,6 +27,7 @@ export default function RootLayout() {
         >
           <Stack.Screen name="(public)" />
           <Stack.Screen name="(auth)" />
+          <Stack.Screen name="auth" />
           <Stack.Screen name="(customer)" />
           <Stack.Screen name="(provider)" />
           <Stack.Screen name="modal" />
